@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #333;
+            overflow: hidden;
+        }
+        .login-container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        .login-container h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .login-container p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        .login-container a {
+            color: #2575fc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        .google {
+            background-color: #4285f4;
+            color: white;
+        }
+        .facebook {
+            background-color: #1877f2;
+            color: white;
+        }
+        .apple {
+            background-color: #333;
+            color: white;
+        }
+        .icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Iniciar sesión</h1>
+        <p>¿No tienes una cuenta? <a href="#">Regístrate</a></p>
+        <button id="google-login" class="button google">
+            <span class="icon">&#x1F4BB;</span> Continuar con Google
+        </button>
+        <button id="facebook-login" class="button facebook">
+            <span class="icon">&#x1F426;</span> Continuar con Facebook
+        </button>
+        <button id="apple-login" class="button apple">
+            <span class="icon">&#x1F34E;</span> Continuar con Apple
+        </button>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Importar Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, OAuthProvider } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCn5_ayb7bUNx_6oRE-ByfCSebHrR6EItk",
+            authDomain: "stote-7a5e2.firebaseapp.com",
+            projectId: "stote-7a5e2",
+            storageBucket: "stote-7a5e2.appspot.com",
+            messagingSenderId: "543349479602",
+            appId: "1:543349479602:web:22f2b9c551f32315d711ab"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
+        // Google Login
+        document.getElementById('google-login').addEventListener('click', () => {
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider)
+                .then(result => alert(`¡Bienvenido, ${result.user.displayName}!`))
+                .catch(error => alert(`Error: ${error.message}`));
+        });
+
+        // Facebook Login
+        document.getElementById('facebook-login').addEventListener('click', () => {
+            const provider = new FacebookAuthProvider();
+            signInWithPopup(auth, provider)
+                .then(result => alert(`¡Bienvenido, ${result.user.displayName}!`))
+                .catch(error => alert(`Error: ${error.message}`));
+        });
+
+        // Apple Login
+        document.getElementById('apple-login').addEventListener('click', () => {
+            const provider = new OAuthProvider('apple.com');
+            signInWithPopup(auth, provider)
+                .then(result => alert(`¡Bienvenido, ${result.user.displayName}!`))
+                .catch(error => alert(`Error: ${error.message}`));
+        });
+    </script>
+</body>
+</html>

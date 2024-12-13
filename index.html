@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stotte aprendizaje divertido</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #008080;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        header img {
+            height: 50px;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer; /* Hace que el enlace parezca un botón */
+        }
+
+        .main-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .category {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .category:hover {
+            transform: scale(1.1);
+        }
+
+        .category button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .category img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        footer {
+            background-color: #008080;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="LogosF/LogoStotte.png" alt="Logo">
+        <nav>
+            <!-- Botón de inicio de sesión -->
+            <a id="google-login" href="#">Iniciar sesión</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <h1>Aprendizaje divertido</h1>
+        <p>¡Empieza a divertirte apoyándote en materias mientras juegas!</p>
+
+        <!-- Categorías -->
+        <div class="categories">
+            <div class="category">
+                <a href="menuciencias.html">
+                    <button><img src="BtnMenu/Ciencias.png" alt="Ciencia"></button>
+                </a>
+            </div>
+            <div class="category">
+                <a href="menumate.html">
+                    <button><img src="BtnMenu/Matemticas.png" alt="Matemáticas"></button>
+                </a>
+            </div>
+            <div class="category">
+                <a href="menuespanol.html">
+                    <button><img src="BtnMenu/Español.png" alt="Español"></button>
+                </a>
+            </div>
+            <div class="category">
+                <a href="menuetica.html">
+                    <button><img src="BtnMenu/Etica.png" alt="Ética"></button>
+                </a>
+            </div>
+            <div class="category">
+                <a href="menuarte.html">
+                    <button><img src="BtnMenu/Arte.png" alt="Arte"></button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Stotte. Todos los derechos reservados.
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Importar Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCn5_ayb7bUNx_6oRE-ByfCSebHrR6EItk",
+            authDomain: "stote-7a5e2.firebaseapp.com",
+            projectId: "stote-7a5e2",
+            storageBucket: "stote-7a5e2.appspot.com",
+            messagingSenderId: "543349479602",
+            appId: "1:543349479602:web:22f2b9c551f32315d711ab"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
+        // Funcionalidad de inicio de sesión con Google
+        document.getElementById('google-login').addEventListener('click', (e) => {
+            e.preventDefault();
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider)
+                .then(result => alert(`¡Bienvenido, ${result.user.displayName}!`))
+                .catch(error => alert(`Error: ${error.message}`));
+        });
+    </script>
+</body>
+</html>
